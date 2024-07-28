@@ -23,9 +23,9 @@ jobs:
       - name: Deploy to Live Server
         run: |
           ssh -o StrictHostKeyChecking=no root@13.212.254.201 << 'EOF'
-            cd /home/test-project
-            docker-compose down
-            docker-compose up --build -d
+            cd /home/technical-test
+            docker compose down
+            docker compose up --build -d
           EOF
 
   deploy-domainSsl:
@@ -44,7 +44,7 @@ jobs:
       - name: Deploy to Live Server
         run: |
           ssh -o StrictHostKeyChecking=no root@13.212.254.201 << 'EOF'
-            cd /home/test-project
-            docker-compose down
-            docker-compose up --build -d
+            cd /home/technical-test
+            docker compose down
+            docker compose up --build -d
           EOF
