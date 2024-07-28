@@ -10,7 +10,7 @@ services:
       - /app/node_modules
     ports:
       - "3000:3000"
-   
+
   vue-frontend:
     container_name: 'vue-frontend'
     build:
@@ -18,22 +18,22 @@ services:
     volumes:
       - ./vue-frontend:/app/node_modules
       - /app/node_modules
-    ports:
-      - "80:80"
     depends_on:
       - back-end
 
-  # nginx:
-  #   container_name: nginx_container
-  #   image: nginx:latest
-  #   build:
-  #     context: ./vue-frontend
-  #   volumes:
-  #     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-  #     - ./vue-frontend:/app/node_modules
-  #     - /app/node_modules 
-  #   ports:
-  #     - "80:80"
+  nginx:
+    container_name: nginx
+    build:
+      context: ./vue-frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - back-end
+      - vue-frontend
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
 
   mariadb:
     container_name: mariadb
@@ -55,6 +55,9 @@ services:
       - MYSQL_PASSWORD=1234a
 
 volumes:
+  certbot-etc:
+  certbot-var:
   db-data:
+
 networks:
   mysqlnetwork:
