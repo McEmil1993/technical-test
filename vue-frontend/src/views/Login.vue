@@ -52,14 +52,13 @@ const login = async () => {
     try {
         isLoading.value = true;
         const response = await api.post('/login', { email: email.value, password: password.value });
-        console.log('response.data:: ', response.data);
+
         localStorage.setItem('token', response.data.data.token);
         localStorage.setItem('name', response.data.data.name);
         localStorage.setItem('email', response.data.data.email);
         localStorage.setItem('role', response.data.data.role);
         router.push('/users');
     } catch (error) {
-        console.log(error.response.data);
 
         errors.value = error.response.data.map(err => {
             return { path: err.path[0], message: err.message };

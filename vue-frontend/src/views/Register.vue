@@ -62,7 +62,6 @@ const register = async () => {
         isLoading.value = true;
         const response = await api.post('/register', { name: name.value, email: email.value, password: password.value, role: 'user' });
 
-        console.log('response.data:: ', response.data);
         localStorage.setItem('token', response.data.data.token);
         localStorage.setItem('name', response.data.data.name);
         localStorage.setItem('email', response.data.data.email);
