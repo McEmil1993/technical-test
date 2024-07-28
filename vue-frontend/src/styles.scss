@@ -1,0 +1,13 @@
+$primary-color: #42b983;
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+button {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
