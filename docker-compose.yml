@@ -10,7 +10,7 @@ services:
       - /app/node_modules
     ports:
       - "3000:3000"
-
+   
   vue-frontend:
     container_name: 'vue-frontend'
     build:
@@ -18,30 +18,13 @@ services:
     volumes:
       - ./vue-frontend:/app/node_modules
       - /app/node_modules
-    depends_on:
-      - back-end
-
-  nginx:
-    container_name: nginx
-    build:
-      context: ./vue-frontend
+      - /etc/letsencrypt/live/dacoylomarkemilcajes.site:/etc/letsencrypt/live/dacoylomarkemilcajes.site:ro
+      - /etc/letsencrypt/archive/dacoylomarkemilcajes.site:/etc/letsencrypt/archive/dacoylomarkemilcajes.site:ro
     ports:
       - "80:80"
       - "443:443"
     depends_on:
       - back-end
-      - vue-frontend
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - ./nginx/default.conf:/etc/nginx/nginx.conf
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
   mariadb:
     container_name: mariadb
@@ -63,9 +46,6 @@ services:
       - MYSQL_PASSWORD=1234a
 
 volumes:
-  certbot-etc:
-  certbot-var:
   db-data:
-
 networks:
   mysqlnetwork:
