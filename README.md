@@ -73,4 +73,13 @@ For CI/CD, to make this work: Whoever pushes or merges to the ***main*** or ***d
 If you have questions , just email me. 
 dacoylomarkemilcajes@gmail.com
 
+This is output
+https://dacoylomarkemilcajes.site
+its already https.
+this is auto deploy.
+
+server : AWS Lightsail
+domain : Hostinger
+
+
 TY......
